@@ -1,69 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Questionnaires</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Unica+One&family=Lora&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Questionnaires – DreamVault</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="starfield"></div>
 
-  <!-- Ambient Audio -->
-  <audio id="ambient" autoplay loop>
-    <source src="ambience.mp3" type="audio/mpeg">
+  <audio id="ambientAudio" autoplay loop>
+    <source src="audio/ambient.mp3" type="audio/mpeg">
   </audio>
-
-  <!-- Click Sound -->
-  <audio id="submitSound" preload="auto">
-    <source src="glimmer.mp3" type="audio/mpeg">
-  </audio>
-
   <button id="muteToggle">🔊</button>
 
   <div class="container">
-    <h1>Questionnaires</h1>
-    <p class="intro">Choose one or both questionnaires to share fragments of your inner world. Your responses remain sacred and anonymous.</p>
+    <h1>Dream Questionnaires</h1>
+    <p class="intro">Want to go deeper? Choose a prompt below to share your dream with more detail.</p>
 
     <div class="buttons">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeJGGAJsfKi1z5CRAFQ70z81GvlBDdgLIP-9esIhcF30m0vUQ/viewform?usp=dialog" target="_blank" class="button" onclick="document.getElementById('submitSound').play();">Emotional Dreamscape</a>
-
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScvW82g8VirWcEaKIvvQjWw_KvnkSZwW_AAnALEBkpaEdEi2Q/viewform?usp=dialog" target="_blank" class="button" onclick="document.getElementById('submitSound').play();">Imaginative Realms</a>
+      <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSeJGGAJsfKi1z5CRAFQ70z81GvlBDdgLIP-9esIhcF30m0vUQ/viewform?usp=dialog" target="_blank">Dream Recollection Form</a>
+      <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLScvW82g8VirWcEaKIvvQjWw_KvnkSZwW_AAnALEBkpaEdEi2Q/viewform?usp=dialog" target="_blank">Recurring/Important Dream Form</a>
     </div>
-
-    <footer>✨ Let your dreams be heard ✨</footer>
   </div>
 
-  <!-- Stardust Cursor + Mute -->
   <script>
-    const ambient = document.getElementById('ambient');
-    ambient.volume = 0.35;
-
-    const muteBtn = document.getElementById('muteToggle');
-    muteBtn.style.position = 'fixed';
-    muteBtn.style.top = '15px';
-    muteBtn.style.right = '15px';
-    muteBtn.style.zIndex = '9999';
-    muteBtn.style.border = 'none';
-    muteBtn.style.background = 'none';
-    muteBtn.style.color = '#ccc';
-    muteBtn.style.fontSize = '1.5rem';
-    muteBtn.style.cursor = 'pointer';
-
-    muteBtn.addEventListener('click', () => {
-      ambient.muted = !ambient.muted;
-      muteBtn.textContent = ambient.muted ? '🔇' : '🔊';
-    });
-
-    document.addEventListener('mousemove', e => {
-      const trail = document.createElement('div');
-      trail.className = 'trail';
-      trail.style.left = `${e.pageX}px`;
-      trail.style.top = `${e.pageY}px`;
+    // Stardust Cursor
+    document.addEventListener("mousemove", e => {
+      const trail = document.createElement("div");
+      trail.className = "trail";
+      trail.style.left = e.pageX + "px";
+      trail.style.top = e.pageY + "px";
       document.body.appendChild(trail);
       setTimeout(() => trail.remove(), 1000);
     });
+
+    // Ambient Mute Toggle
+    const audio = document.getElementById("ambientAudio");
+    const toggle = document.getElementById("muteToggle");
+    toggle.onclick = () => {
+      audio.muted = !audio.muted;
+      toggle.textContent = audio.muted ? "🔇" : "🔊";
+    };
   </script>
 </body>
 </html>
