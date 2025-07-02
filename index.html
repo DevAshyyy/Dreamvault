@@ -5,42 +5,128 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dreamvault</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      cursor: none;
+      overflow: hidden;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .stars {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+      animation: moveStars 200s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes moveStars {
+      from { background-position: 0 0; }
+      to { background-position: -10000px 10000px; }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
 </head>
 <body>
-  <!-- Twinkling background -->
-  <div class="starfield"></div>
+  <!-- Star texture background -->
+  <div class="stars"></div>
+  <!-- Stardust cursor trail -->
+  <canvas id="trail"></canvas>
 
-  <!-- Main container -->
+  <!-- Your existing Dreamvault content -->
   <div class="container">
     <h1>Dreamvault</h1>
     <p class="intro">
       A quiet cosmic chamber where soft wishes, unmet needs, and starlit thoughts are stored.<br>
       Choose a path below to share or explore.
     </p>
-
-    <p class="quote">“There are galaxies tucked behind our ribs — and this is where they echo.”</p>
-
-    <div class="orb-ring">
-      <div class="buttons">
-        <a href="forms/leave-a-dream.html" class="button">Leave a Dream</a>
-        <a href="forms/questionnaires.html" class="button">Explore the Vault</a>
-      </div>
+    <div class="buttons">
+      <a href="forms/leave-a-dream.html" class="button">Leave a Dream</a>
+      <a href="forms/questionnaires.html" class="button">Explore the Vault</a>
     </div>
-
-    <footer>
-      <p>© 2025 Dreamvault · Crafted by starlight</p>
-    </footer>
   </div>
 
-  <!-- Stardust trail -->
+  <!-- Audio -->
+  <audio id="ambience" src="ambience.mp3" loop preload="auto"></audio>
+  <audio id="chime" src="glimmer.mp3" preload="auto"></audio>
+
+  <!-- JavaScript for sound & cursor trail -->
   <script>
-    document.addEventListener("mousemove", (e) => {
-      const dot = document.createElement("div");
-      dot.className = "trail";
-      dot.style.left = `${e.pageX}px`;
-      dot.style.top = `${e.pageY}px`;
-      document.body.appendChild(dot);
-      setTimeout(() => dot.remove(), 1000);
+    // Start ambient music on first click
+    const ambience = document.getElementById('ambience');
+    ambience.volume = 0.35;
+    window.addEventListener('click', () => {
+      if (ambience.paused) ambience.play().catch(() => {});
+    }, { once: true });
+
+    // Play chime when buttons are clicked
+    const chime = document.getElementById('chime');
+    document.querySelectorAll('a.button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        chime.currentTime = 0;
+        chime.play().catch(() => {});
+      });
+    });
+
+    // Stardust cursor trail
+    const canvas = document.getElementById('trail');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+
+    function createParticle(x, y) {
+      particles.push({
+        x,
+        y,
+        alpha: 1,
+        size: Math.random() * 2 + 1,
+        dx: (Math.random() - 0.5) * 0.5,
+        dy: (Math.random() - 0.5) * 0.5
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p, i) => {
+        p.x += p.dx;
+        p.y += p.dy;
+        p.alpha -= 0.01;
+        if (p.alpha <= 0) particles.splice(i, 1);
+        else {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(201, 170, 255, ${p.alpha})`;
+          ctx.fill();
+        }
+      });
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener('mousemove', e => {
+      for (let i = 0; i < 2; i++) {
+        createParticle(e.clientX, e.clientY);
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     });
   </script>
 </body>
