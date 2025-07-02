@@ -37,15 +37,27 @@
       position: relative;
       z-index: 1;
     }
+
+    .mute-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 999;
+      background-color: transparent;
+      color: #fff;
+      font-size: 1.5rem;
+      border: none;
+      cursor: pointer;
+      text-shadow: 0 0 6px #caaaff;
+    }
   </style>
 </head>
 <body>
-  <!-- Star texture background -->
   <div class="stars"></div>
-  <!-- Stardust cursor trail -->
   <canvas id="trail"></canvas>
 
-  <!-- Your existing Dreamvault content -->
+  <button id="muteToggle" class="mute-button">🔊</button>
+
   <div class="container">
     <h1>Dreamvault</h1>
     <p class="intro">
@@ -58,20 +70,16 @@
     </div>
   </div>
 
-  <!-- Audio -->
   <audio id="ambience" src="ambience.mp3" loop preload="auto"></audio>
   <audio id="chime" src="glimmer.mp3" preload="auto"></audio>
 
-  <!-- JavaScript for sound & cursor trail -->
   <script>
-    // Start ambient music on first click
     const ambience = document.getElementById('ambience');
     ambience.volume = 0.35;
     window.addEventListener('click', () => {
       if (ambience.paused) ambience.play().catch(() => {});
     }, { once: true });
 
-    // Play chime when buttons are clicked
     const chime = document.getElementById('chime');
     document.querySelectorAll('a.button').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -80,7 +88,12 @@
       });
     });
 
-    // Stardust cursor trail
+    const muteToggle = document.getElementById('muteToggle');
+    muteToggle.addEventListener('click', () => {
+      ambience.muted = !ambience.muted;
+      muteToggle.textContent = ambience.muted ? '🔇' : '🔊';
+    });
+
     const canvas = document.getElementById('trail');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
