@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Leave a Dream | Dreamvault</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Lora&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <style>
@@ -15,7 +15,7 @@
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 18px;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
       box-shadow: 0 0 40px rgba(160, 140, 255, 0.06);
       position: relative;
       z-index: 1;
@@ -59,6 +59,7 @@
       font-size: 1rem;
       cursor: pointer;
       transition: all 0.3s ease;
+      font-family: 'Lora', serif;
     }
 
     .submit-btn:hover {
@@ -72,24 +73,62 @@
       color: #c0ffee;
       font-style: italic;
       font-size: 1rem;
+      text-align: center;
+    }
+
+    .starfield {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      background-image: 
+        radial-gradient(1px 1px at 20% 30%, #ffffff22 100%, transparent 0),
+        radial-gradient(1px 1px at 70% 40%, #ffffff11 100%, transparent 0),
+        radial-gradient(1px 1px at 50% 80%, #ffffff33 100%, transparent 0),
+        radial-gradient(1px 1px at 90% 10%, #ffffff44 100%, transparent 0);
+      background-size: 100% 100%;
+      animation: starsTwinkle 6s infinite alternate ease-in-out;
+    }
+
+    @keyframes starsTwinkle {
+      0% { opacity: 0.7; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.03); }
+    }
+
+    .trail {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffffffcc 0%, #a8a0ff00 80%);
+      pointer-events: none;
+      animation: fadeTrail 1s forwards;
+      z-index: 9999;
+    }
+
+    @keyframes fadeTrail {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(2); opacity: 0; }
     }
   </style>
 </head>
 <body>
   <div class="starfield"></div>
-  <audio id="chime" src="glimmer.mp3" preload="auto"></audio>
+  <audio id="chime" src="../glimmer.mp3" preload="auto"></audio>
 
   <div class="container">
     <h1>Leave a Dream</h1>
-    <p class="intro">Whether it's a thought, a wish, or a memory you can’t shake — send it to the vault. Your name is optional, and it will remain private unless you choose otherwise.</p>
+    <p class="intro">Whether it’s a wish, a thought, or something soft you couldn’t say aloud — leave it here. Your message will be held in starlight.</p>
 
     <div class="form-wrapper">
       <form id="dreamForm">
         <label for="name">Name (optional)</label>
-        <input type="text" id="name" name="name" placeholder="stardust wanderer...">
+        <input type="text" id="name" name="name" placeholder="...a soft signature">
 
         <label for="dream">Your Dream</label>
-        <textarea id="dream" name="dream" placeholder="Write anything that's been orbiting your mind..."></textarea>
+        <textarea id="dream" name="dream" placeholder="Write something to release..."></textarea>
 
         <button type="submit" class="submit-btn">Send it to the stars</button>
         <div id="successMsg" class="success-message" style="display:none;">🌠 Sent to the vault. Thank you, dreamer.</div>
@@ -106,13 +145,12 @@
       e.preventDefault();
       chime.play();
 
-      // TODO: Hook to backend like Formspree or Google Sheets here
-
+      // TODO: Add backend integration here
       form.reset();
       successMsg.style.display = 'block';
     });
 
-    // Stardust trail
+    // Stardust cursor
     document.addEventListener('mousemove', e => {
       const trail = document.createElement('div');
       trail.className = 'trail';
