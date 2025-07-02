@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
+  <!-- Starry Background -->
   <div class="starfield"></div>
 
   <!-- Ambient Audio -->
@@ -19,14 +20,21 @@
     <source src="../glimmer.mp3" type="audio/mpeg">
   </audio>
 
+  <!-- Mute Toggle -->
   <button id="muteToggle">🔊</button>
 
-  <div class="container">
+  <div class="container orb-ring">
     <h1>Leave a Dream</h1>
     <p class="intro">Leave anything your heart needs to whisper. This space is anonymous and sacred.</p>
 
-    <form action="submit-dream.php" method="POST" onsubmit="document.getElementById('submitSound').play();">
-      <textarea name="dream" placeholder="Type your dream here..." rows="10" style="width:100%; border-radius: 12px; padding: 1rem; font-family: 'Lora', serif; font-size: 1rem;"></textarea>
+    <form action="https://usebasin.com/f/75f87fe2724b" method="POST" onsubmit="document.getElementById('submitSound').play();">
+      <textarea 
+        name="dream" 
+        placeholder="Type your dream here..." 
+        rows="10" 
+        required 
+        style="width:100%; border-radius: 12px; padding: 1rem; font-family: 'Lora', serif; font-size: 1rem; border: 1px solid #a8a0ff; background: rgba(255,255,255,0.03); color: #e0e0ff;">
+      </textarea>
       <br><br>
       <button type="submit" class="button">Send it to the stars</button>
     </form>
