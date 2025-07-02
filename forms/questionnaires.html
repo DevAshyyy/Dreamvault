@@ -5,14 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Questionnaires</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Unica+One&family=Lora&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="starfield"></div>
 
+  <!-- Ambient Audio -->
   <audio id="ambient" autoplay loop>
     <source src="ambience.mp3" type="audio/mpeg">
   </audio>
 
+  <!-- Click Sound -->
   <audio id="submitSound" preload="auto">
     <source src="glimmer.mp3" type="audio/mpeg">
   </audio>
@@ -21,14 +24,18 @@
 
   <div class="container">
     <h1>Questionnaires</h1>
-    <p class="intro">Select a path to explore and reflect:</p>
+    <p class="intro">Choose one or both questionnaires to share fragments of your inner world. Your responses remain sacred and anonymous.</p>
 
     <div class="buttons">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScvW82g8VirWcEaKIvvQjWw_KvnkSZwW_AAnALEBkpaEdEi2Q/viewform?usp=dialog" target="_blank" class="button" onclick="document.getElementById('submitSound').play();">🎮 Game Worlds Within</a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeJGGAJsfKi1z5CRAFQ70z81GvlBDdgLIP-9esIhcF30m0vUQ/viewform?usp=dialog" target="_blank" class="button" onclick="document.getElementById('submitSound').play();">💫 Emotional Resonance</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeJGGAJsfKi1z5CRAFQ70z81GvlBDdgLIP-9esIhcF30m0vUQ/viewform?usp=dialog" target="_blank" class="button" onclick="document.getElementById('submitSound').play();">Emotional Dreamscape</a>
+
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScvW82g8VirWcEaKIvvQjWw_KvnkSZwW_AAnALEBkpaEdEi2Q/viewform?usp=dialog" target="_blank" class="button" onclick="document.getElementById('submitSound').play();">Imaginative Realms</a>
     </div>
+
+    <footer>✨ Let your dreams be heard ✨</footer>
   </div>
 
+  <!-- Stardust Cursor + Mute -->
   <script>
     const ambient = document.getElementById('ambient');
     ambient.volume = 0.35;
