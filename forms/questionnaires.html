@@ -3,28 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dreamvault • Questionnaires</title>
-  <link rel="stylesheet" href="../style.css" />
+  <title>Questionnaires</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="starfield"></div>
 
   <audio id="ambient" autoplay loop>
-    <source src="../ambience.mp3" type="audio/mpeg">
+    <source src="ambience.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio id="submitSound" preload="auto">
+    <source src="glimmer.mp3" type="audio/mpeg">
   </audio>
 
   <button id="muteToggle">🔊</button>
 
   <div class="container">
-    <h1>Explore the Vault</h1>
-    <p class="intro">Two questionnaires await. Follow whichever one calls to you first.</p>
+    <h1>Questionnaires</h1>
+    <p class="intro">Select a path to explore and reflect:</p>
 
     <div class="buttons">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeJGGAJsfKi1z5CRAFQ70z81GvlBDdgLIP-9esIhcF30m0vUQ/viewform?usp=sharing" class="button" target="_blank">Emotional Inventory</a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScvW82g8VirWcEaKIvvQjWw_KvnkSZwW_AAnALEBkpaEdEi2Q/viewform?usp=sharing" class="button" target="_blank">Game of Self</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScvW82g8VirWcEaKIvvQjWw_KvnkSZwW_AAnALEBkpaEdEi2Q/viewform?usp=dialog" target="_blank" class="button" onclick="document.getElementById('submitSound').play();">🎮 Game Worlds Within</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeJGGAJsfKi1z5CRAFQ70z81GvlBDdgLIP-9esIhcF30m0vUQ/viewform?usp=dialog" target="_blank" class="button" onclick="document.getElementById('submitSound').play();">💫 Emotional Resonance</a>
     </div>
-
-    <footer>More may arrive in time...</footer>
   </div>
 
   <script>
