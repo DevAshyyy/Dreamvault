@@ -37,11 +37,26 @@
       position: relative;
       z-index: 1;
     }
+
+    .mute-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 999;
+      background-color: transparent;
+      color: #fff;
+      font-size: 1.5rem;
+      border: none;
+      cursor: pointer;
+      text-shadow: 0 0 6px #caaaff;
+    }
   </style>
 </head>
 <body>
   <div class="stars"></div>
   <canvas id="trail"></canvas>
+
+  <button id="muteToggle" class="mute-button">🔊</button>
 
   <div class="container">
     <h1>Leave a Dream</h1>
@@ -69,6 +84,11 @@
     window.addEventListener('click', () => {
       if (ambience.paused) ambience.play().catch(() => {});
     }, { once: true });
+
+    document.getElementById('muteToggle').addEventListener('click', function () {
+      ambience.muted = !ambience.muted;
+      this.textContent = ambience.muted ? '🔇' : '🔊';
+    });
 
     const canvas = document.getElementById('trail');
     const ctx = canvas.getContext('2d');
