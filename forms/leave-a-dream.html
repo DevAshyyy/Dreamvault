@@ -2,46 +2,50 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Leave a Dream – DreamVault</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Leave a Dream – Dreamvault</title>
+  <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-  <div class="starfield"></div>
+  <div class="stars"></div>
+  <canvas id="trail"></canvas>
 
-  <audio id="ambientAudio" autoplay loop>
-    <source src="audio/ambient.mp3" type="audio/mpeg">
-  </audio>
+  <audio id="ambience" src="../ambience.mp3" loop preload="auto"></audio>
   <button id="muteToggle">🔊</button>
 
   <div class="container">
     <h1>Leave a Dream</h1>
-    <p class="intro">Speak freely. This is your anonymous space to write any dream you remember, strange or beautiful.</p>
-
-    <form action="https://usebasin.com/f/75f87fe2724b" method="POST">
-      <label for="dream">Your Dream</label>
-      <textarea id="dream" name="dream" rows="10" required></textarea>
-      <button class="button" type="submit">Submit Dream</button>
+    <p class="intro">Leave anything your heart needs to whisper. This space is anonymous and sacred.</p>
+    <form action="https://usebasin.com/f/75f87fe2724b" method="POST" onsubmit="document.getElementById('submitSound').play();">
+      <textarea name="dream" rows="10" placeholder="Type what drifted into your dreams…" required></textarea>
+      <button type="submit" class="button">Send it to the stars</button>
     </form>
+    <footer>✨ Your message will rest in the cosmos ✨</footer>
   </div>
 
-  <script>
-    // Stardust Cursor
-    document.addEventListener("mousemove", e => {
-      const trail = document.createElement("div");
-      trail.className = "trail";
-      trail.style.left = e.pageX + "px";
-      trail.style.top = e.pageY + "px";
-      document.body.appendChild(trail);
-      setTimeout(() => trail.remove(), 1000);
-    });
+  <!-- Click sound -->
+  <audio id="submitSound" src="../glimmer.mp3" preload="auto"></audio>
 
-    // Ambient Mute Toggle
-    const audio = document.getElementById("ambientAudio");
-    const toggle = document.getElementById("muteToggle");
-    toggle.onclick = () => {
-      audio.muted = !audio.muted;
-      toggle.textContent = audio.muted ? "🔇" : "🔊";
+  <script>
+    const ambience = document.getElementById('ambience');
+    ambience.volume = 0.35;
+    window.addEventListener('click', () => { if (ambience.paused) ambience.play().catch(() => {}); }, { once: true });
+
+    const muteBtn = document.getElementById('muteToggle');
+    muteBtn.onclick = () => {
+      ambience.muted = !ambience.muted;
+      muteBtn.textContent = ambience.muted ? '🔇' : '🔊';
     };
+
+    const canvas = document.getElementById('trail');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    let particles = [];
+    function createParticle(x,y){particles.push({x,y,alpha:1,size:Math.random()*2+1,dx:(Math.random()-0.5)*0.5,dy:(Math.random()-0.5)*0.5});}
+    function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach((p,i)=>{p.x+=p.dx;p.y+=p.dy; p.alpha-=0.01; if(p.alpha<=0)particles.splice(i,1); else{ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fillStyle=`rgba(201,170,255,${p.alpha})`; ctx.fill();}});requestAnimationFrame(animate);}
+    animate();
+    window.addEventListener('mousemove', e => { for(let i=0;i<2;i++) createParticle(e.clientX,e.clientY); });
+    window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
   </script>
 </body>
 </html>
