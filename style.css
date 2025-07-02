@@ -1,4 +1,3 @@
-/* ====== Fonts from Google ====== */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=EB+Garamond&family=Lora&display=swap');
 
 * {
@@ -18,7 +17,7 @@ body {
   padding: 2rem;
 }
 
-/* Starfield */
+/* ✨ Starfield */
 .starfield {
   position: fixed;
   top: 0; left: 0;
@@ -40,7 +39,7 @@ body {
   100% { opacity: 1; transform: scale(1.03); }
 }
 
-/* Stardust Cursor */
+/* 💫 Stardust Cursor */
 .trail {
   position: absolute;
   width: 6px;
@@ -57,7 +56,7 @@ body {
   100% { transform: scale(2); opacity: 0; }
 }
 
-/* Container */
+/* ✨ Container */
 .container {
   max-width: 750px;
   margin: 0 auto;
@@ -71,7 +70,7 @@ body {
   z-index: 1;
 }
 
-/* Header */
+/* 🌙 Header */
 h1 {
   font-family: 'Playfair Display', serif;
   font-size: 3.2rem;
@@ -86,7 +85,7 @@ h1 {
   50% { transform: translateY(-6px); }
 }
 
-/* Intro */
+/* 🪐 Intro */
 .intro {
   font-family: 'EB Garamond', serif;
   font-size: 1.2rem;
@@ -95,7 +94,6 @@ h1 {
   line-height: 1.7;
 }
 
-/* Celestial quote */
 .quote {
   font-style: italic;
   font-size: 1rem;
@@ -104,7 +102,7 @@ h1 {
   opacity: 0.8;
 }
 
-/* Ring Effect */
+/* ✧ Orb Ring Effect */
 .orb-ring {
   border: 1px dashed rgba(200, 180, 255, 0.15);
   padding: 2rem;
