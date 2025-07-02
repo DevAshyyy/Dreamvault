@@ -62,8 +62,8 @@
     <h1>Leave a Dream</h1>
     <p class="intro">Leave anything your heart needs to whisper. This space is anonymous and sacred.</p>
 
-    <form action="https://usebasin.com/f/75f87fe2724b" method="POST" onsubmit="document.getElementById('submitSound').play();">
-      <textarea name="dream" placeholder="Type your dream here..." rows="10" required></textarea>
+    <form action="https://usebasin.com/f/75f87fe2724b" method="POST" onsubmit="return validateForm();">
+      <textarea id="dream" name="dream" placeholder="Type your dream here..." rows="10" required></textarea>
       <br><br>
       <button type="submit" class="button">Send it to the stars</button>
     </form>
@@ -90,6 +90,17 @@
       this.textContent = ambience.muted ? '🔇' : '🔊';
     });
 
+    function validateForm() {
+      const input = document.getElementById('dream').value.trim();
+      if (input === "") {
+        alert("Please write something before sending it to the stars.");
+        return false;
+      }
+      document.getElementById('submitSound').play();
+      return true;
+    }
+
+    // Stardust trail
     const canvas = document.getElementById('trail');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
