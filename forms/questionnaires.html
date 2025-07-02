@@ -3,26 +3,63 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Explore the Vault</title>
+  <title>Dreamvault Questionnaires</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Starry Background -->
+  <div class="starfield"></div>
+
+  <!-- Ambient Music -->
+  <audio id="ambient" autoplay loop preload="auto">
+    <source src="ambience.mp3" type="audio/mpeg" />
+  </audio>
+  <button id="muteToggle">🔊</button>
+
+  <!-- Main Content -->
   <div class="container">
-    <h1>Explore the Vault</h1>
-    <p class="intro">
-      Each link below is a quiet doorway into someone's unspoken world.  
-      Choose the path that calls to you, and help build what doesn't yet exist.
-    </p>
+    <h1>Dreamvault Questionnaires</h1>
+    <p class="intro">These forms help uncover where you belong. Choose the one that calls to you most.</p>
 
-    <div class="buttons">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScvW82g8VirWcEaKIvvQjWw_KvnkSZwW_AAnALEBkpaEdEi2Q/viewform?usp=dialog" class="button" target="_blank">🕹️ Game Dreams</a>
-
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeJGGAJsfKi1z5CRAFQ70z81GvlBDdgLIP-9esIhcF30m0vUQ/viewform?usp=dialog" class="button" target="_blank">💭 Emotional Echoes</a>
+    <div class="orb-ring">
+      <div class="buttons">
+        <a href="https://docs.google.com/forms/d/e/EXAMPLE_FORM_1/viewform" target="_blank" class="button">Soul Alignment</a>
+        <a href="https://docs.google.com/forms/d/e/EXAMPLE_FORM_2/viewform" target="_blank" class="button">Village Destiny</a>
+      </div>
     </div>
 
-    <div style="margin-top: 3rem;">
-      <a href="../index.html" class="button">← Back to Dreamvault</a>
-    </div>
+    <footer>This is part of the Dreamvault experience</footer>
   </div>
+
+  <!-- Stardust Cursor Trail -->
+  <script>
+    const ambient = document.getElementById('ambient');
+    ambient.volume = 0.35;
+
+    const muteBtn = document.getElementById('muteToggle');
+    muteBtn.style.position = 'fixed';
+    muteBtn.style.top = '15px';
+    muteBtn.style.right = '15px';
+    muteBtn.style.zIndex = '9999';
+    muteBtn.style.border = 'none';
+    muteBtn.style.background = 'none';
+    muteBtn.style.color = '#ccc';
+    muteBtn.style.fontSize = '1.5rem';
+    muteBtn.style.cursor = 'pointer';
+
+    muteBtn.addEventListener('click', () => {
+      ambient.muted = !ambient.muted;
+      muteBtn.textContent = ambient.muted ? '🔇' : '🔊';
+    });
+
+    document.addEventListener('mousemove', e => {
+      const trail = document.createElement('div');
+      trail.className = 'trail';
+      trail.style.left = `${e.pageX}px`;
+      trail.style.top = `${e.pageY}px`;
+      document.body.appendChild(trail);
+      setTimeout(() => trail.remove(), 1000);
+    });
+  </script>
 </body>
 </html>
