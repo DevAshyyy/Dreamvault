@@ -4,37 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Leave a Dream</title>
-  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Starry Background -->
   <div class="starfield"></div>
 
-  <!-- Ambient Audio -->
   <audio id="ambient" autoplay loop>
-    <source src="../ambience.mp3" type="audio/mpeg">
+    <source src="ambience.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Click Sound -->
   <audio id="submitSound" preload="auto">
-    <source src="../glimmer.mp3" type="audio/mpeg">
+    <source src="glimmer.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Mute Toggle -->
   <button id="muteToggle">🔊</button>
 
-  <div class="container orb-ring">
+  <div class="container">
     <h1>Leave a Dream</h1>
     <p class="intro">Leave anything your heart needs to whisper. This space is anonymous and sacred.</p>
 
     <form action="https://usebasin.com/f/75f87fe2724b" method="POST" onsubmit="document.getElementById('submitSound').play();">
-      <textarea 
-        name="dream" 
-        placeholder="Type your dream here..." 
-        rows="10" 
-        required 
-        style="width:100%; border-radius: 12px; padding: 1rem; font-family: 'Lora', serif; font-size: 1rem; border: 1px solid #a8a0ff; background: rgba(255,255,255,0.03); color: #e0e0ff;">
-      </textarea>
+      <textarea name="dream" placeholder="Type your dream here..." rows="10" style="width:100%; border-radius: 12px; padding: 1rem; font-family: 'Lora', serif; font-size: 1rem;" required></textarea>
       <br><br>
       <button type="submit" class="button">Send it to the stars</button>
     </form>
@@ -42,7 +32,6 @@
     <footer>✨ Your message will rest among the cosmos ✨</footer>
   </div>
 
-  <!-- Stardust Cursor -->
   <script>
     const ambient = document.getElementById('ambient');
     ambient.volume = 0.35;
